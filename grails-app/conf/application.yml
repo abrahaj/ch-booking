@@ -1,0 +1,153 @@
+---
+grails:
+    profile: rest-api
+    codegen:
+        defaultPackage: ch.booking
+    gorm:
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+    jmx:
+        unique-names: true
+    main:
+        banner-mode: "off"
+    groovy:
+        template:
+            check-template-location: false
+    devtools:
+        restart:
+            additional-exclude:
+                - '*.gsp'
+                - '**/*.gsp'
+                - '*.gson'
+                - '**/*.gson'
+                - 'logback.groovy'
+                - '*.properties'
+management:
+    endpoints:
+        enabled-by-default: false
+
+---
+grails:
+    mime:
+        disable:
+            accept:
+                header:
+                    userAgents:
+                        - Gecko
+                        - WebKit
+                        - Presto
+                        - Trident
+        types:
+            json:
+              - application/json
+              - text/json   
+            hal:
+              - application/hal+json
+              - application/hal+xml  
+            xml:
+              - text/xml
+              - application/xml                                 
+            atom: application/atom+xml
+            css: text/css
+            csv: text/csv
+            js: text/javascript
+            rss: application/rss+xml
+            text: text/plain
+            all: '*/*'            
+    urlmapping:
+        cache:
+            maxsize: 1000
+    controllers:
+        defaultScope: singleton
+    converters:
+        encoding: UTF-8
+
+---
+hibernate:
+    cache:
+        queries: false
+        use_second_level_cache: false
+        use_query_cache: false
+dataSource:
+    username: root
+    password: 'ZanaZana'
+
+environments:
+    development:
+        dataSource:
+            dbCreate: "update"
+            url: "jdbc:mysql://localhost:3306/booking?autoReconnect=true&useSSL=true&serverTimezone=Europe/Berlin"
+            driverClassName: "com.mysql.cj.jdbc.Driver"
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            properties:
+                jmxEnabled: true
+                initialSize: 7
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                # Mysql specific driver properties
+                # http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
+                # let Tomcat JDBC Pool handle reconnecting
+                autoReconnect: true
+                # truncation behaviour
+                jdbcCompliantTruncation: false
+                # mysql 0-date conversion
+                zeroDateTimeBehavior: 'convertToNull'
+                # Tomcat JDBC Pool's StatementCache is used instead, so disable mysql driver's cache
+                cachePrepStmts: false
+                cacheCallableStmts: false
+                # Tomcat JDBC Pool's StatementFinalizer keeps track
+                dontTrackOpenResources: true
+                # performance optimization: reduce number of SQLExceptions thrown in mysql driver code
+                holdResultsOpenOverStatementClose: true
+                # enable MySQL query cache - using server prep stmts will disable query caching
+                useServerPrepStmts: false
+                # metadata caching
+                cacheServerConfiguration: true
+                cacheResultSetMetadata: true
+                metadataCacheSize: 100
+                # timeouts for TCP/IP
+                connectTimeout: 15000
+                socketTimeout: 120000
+                # timer tuning (disable)
+                maintainTimeStats: false
+                enableQueryTimeouts: false
+                # misc tuning
+                noDatetimeStringSync: true
+        server:
+            port: 8280
+    test:
+        dataSource:
+            dbCreate: update
+            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    production:
+        dataSource:
+            dbCreate: none
+            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            properties:
+                jmxEnabled: true
+                initialSize: 5
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                maxAge: 600000
+                timeBetweenEvictionRunsMillis: 5000
+                minEvictableIdleTimeMillis: 60000
+                validationQuery: SELECT 1
+                validationQueryTimeout: 3
+                validationInterval: 15000
+                testOnBorrow: true
+                testWhileIdle: true
+                testOnReturn: false
+                jdbcInterceptors: ConnectionState
+                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
