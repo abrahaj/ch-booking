@@ -1,4 +1,4 @@
-package ch.booking
+package al.rb.booking
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

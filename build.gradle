@@ -10,13 +10,13 @@ buildscript {
 }
 
 version "0.1"
-group "al.brut.booking"
+group "al.rb.booking"
 
-apply plugin:"eclipse"
 apply plugin:"idea"
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.plugins.views-json"
+apply plugin: "org.grails.grails-doc"
 
 repositories {
     maven { url "https://repo.grails.org/grails/core" }

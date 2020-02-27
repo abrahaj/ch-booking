@@ -1,4 +1,4 @@
-package ch.booking
+package al.rb.booking
 
 class BootStrap {
 

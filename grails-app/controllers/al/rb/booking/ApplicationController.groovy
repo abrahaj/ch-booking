@@ -1,4 +1,4 @@
-package ch.booking
+package al.rb.booking
 
 import grails.core.GrailsApplication
 import grails.plugins.*
