@@ -4,7 +4,11 @@ package al.rb.booking
  * https://connect.booking.com/user_guide/site/en-US/api-reference/Service/
  */
 class Service {
-
+    int code
+    int existCode
+    int quantity
+    boolean included
+    static hasMany = [type:HotelAmenityCode, item:Item]
 /**
  *  <Service Code="5" Included="false"/>
  *  *           <Service Code="173" Price="14" CurrencyCode="EUR">

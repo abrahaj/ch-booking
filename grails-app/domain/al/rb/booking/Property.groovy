@@ -4,9 +4,8 @@ class Property {
     String name
     String id
     String propertyLicenseNumber
-    static hasMany = [contactInfo: ContactInfo, language: Language, service: Service]
-    CategoryCode categoryCode
-    GeoPosition position
+    static hasMany = [contactInfo: ContactInfo]
+    HotelInfo hotelInfo
 /**
  * <?xml version="1.0" encoding="UTF-8"?>
  * <OTA_HotelDescriptiveContentNotifRQ xmlns="http://www.opentravel.org/OTA/2003/05" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PrimaryLangID="en-us" EchoToken="GUID" TimeStamp="2015-06-09T09:30:47Z" xsi:schemaLocation="http://www.opentravel.org/2014B/OTA_HotelDescriptiveContentNotifRQ.xsd" id="OTA2014B" Version="8.0" Target="Test">
@@ -16,77 +15,7 @@ class Property {
  *       ... @See BookingContactInfo
  *       </ContactInfos>
  *       <HotelInfo>
- *         <CategoryCodes>
- *           <GuestRoomInfo Quantity="100"/>
- *           <HotelCategory Code="20" ExistsCode="1"/>
- *         </CategoryCodes>
- *         <Languages>
-            ... @See BookingLanguage
- *         </Languages>
- *         <Position Latitude="49.4092" Longitude="1.0900"/>
- *         <Services>
- *          ... @See Service
- *         </Services>
- *         <OwnershipManagementInfos>
- *           <OwnershipManagementInfo>
- *             <CompanyName Code="1234"/>
- *           </OwnershipManagementInfo>
- *         </OwnershipManagementInfos>
- *         <RelativePositions>
- *           <RelativePosition>
- *             <Transportations>
- *               <Transportation>
- *                 <TPA_Extensions>
- *                   <Route>
- *                     <Leg>
- *                       <Start Type='airport' Code='AMS'/>
- *                       <TransportType Code="5000"/>
- *                       <Departure UponArrangement="1"/>
- *                     </Leg>
- *                     <JourneyTime Minutes="20"/>
- *                     <Price Amount="10" CurrencyCode="EUR"/>
- *                   </Route>
- *                 </TPA_Extensions>
- *               </Transportation>
- *               <Transportation>
- *                 <TPA_Extensions>
- *                   <Route>
- *                     <Leg>
- *                       <Start Type='airport' Code='AMS'/>
- *                       <TransportType Code="3"/>
- *                       <Line Name="10"/>
- *                       <Departure Interval="20"/>
- *                     </Leg>
- *                     <JourneyTime Minutes="20"/>
- *                     <Price Amount="5.5" CurrencyCode="EUR"/>
- *                   </Route>
- *                 </TPA_Extensions>
- *               </Transportation>
- *               <Transportation>
- *                 <TPA_Extensions>
- *                   <Route>
- *                     <Leg>
- *                       <Start Type='airport' Code='AMS'/>
- *                       <TransportType Code="5"/>
- *                       <Motorway Name="A2"/>
- *                       <Junction Name="Amsterdam Zuid"/>
- *                     </Leg>
- *                     <JourneyTime Minutes="30"/>
- *                   </Route>
- *                 </TPA_Extensions>
- *               </Transportation>
- *             </Transportations>
- *           </RelativePosition>
- *         </RelativePositions>
- *         <TPA_Extensions>
- *           <AcceptedPayments>
- *             <AcceptedPayment PaymentTypeCode="1"/>
- *             <AcceptedPayment PaymentTypeCode="2"/>
- *             <AcceptedPayment PaymentTypeCode="3"/>
- *           </AcceptedPayments>
- *           <HotelierMessage Language="en">Our hotel defies gravity and floats in mid-air ...
- *          </HotelierMessage>
- *         </TPA_Extensions>
+ *        ... @See HotelInfo
  *       </HotelInfo>
  *       <FacilityInfo>
  *         <GuestRooms>
