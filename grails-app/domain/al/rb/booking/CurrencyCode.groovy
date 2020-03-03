@@ -1,0 +1,235 @@
+/*
+ *
+ *  New Ventures Shpk
+ *  __________________
+ *
+ *   [2019] New Ventures Shpk
+ *   All Rights Reserved.
+ *
+ *  NOTICE:  All information contained herein is, and remains
+ *  the property of New Ventures Shpk and its suppliers,
+ *  if any.  The intellectual and technical concepts contained
+ *  herein are proprietary to New Ventures Shpk.
+ *  Dissemination of this information or reproduction of this material
+ *  is strictly forbidden unless prior written permission is obtained
+ *  from New Ventures Shpk.
+ *
+ */
+
+package al.rb.booking
+/**
+ * (BCL) Booking.com Language Codes¶
+ * https://connect.booking.com/user_guide/site/en-US/codes-bcl/
+ */
+enum CurrencyCode {
+    EUR("EUR", "Euro"),
+    USD("USD", "U.S. dollar"),
+    BHD("BHD", "Bahrain dinar"),
+    BWP("BWP", "Botswana pula"),
+    BND("BND", "Brunei dollar"),
+    CLP("CLP", "Chilean peso"),
+    INR("INR", "Indian rupee"),
+    LYD("LYD", "Libyan dinar"),
+    MUR("MUR", "Mauritian rupee"),
+    NPR("NPR", "Nepalese rupee"),
+    PKR("PKR", "Pakistan rupee"),
+    QAR("QAR", "Qatar riyal"),
+    SAR("SAR", "Saudi Arabian riyal"),
+    SIT("SIT", "Slovenian tolar"),
+    LKR("LKR", "Sri Lanka rupee"),
+    AED("AED", "U.A.E. dirham"),
+    BRL("BRL", "Brazilian real"),
+    COP("COP", "Colombian peso"),
+    IRR("IRR", "Iranian rial"),
+    ILS("ILS", "Israeli new sheqel"),
+    MXN("MXN", "Mexican peso"),
+    OMR("OMR", "Omani rial"),
+    KWD("KWD", "Kuwaiti dinar"),
+    TTD("TTD", "Trinidad &amp; Tobago dollar"),
+    ARS("ARS", "Argentine peso"),
+    VEB("VEB", "Venezuelan bolivar"),
+    TWD("TWD", "New Taiwan Dollar"),
+    KHR("KHR", "Cambodia Riel"),
+    MOP("MOP", "Macanese pataca"),
+    VND("VND", "Vietnam Dong"),
+    JPY("JPY", "Japanese yen"),
+    CYP("CYP", "Cyprus pound"),
+    CZK("CZK", "Czech koruna"),
+    DKK("DKK", "Danish krone"),
+    GBP("GBP", "Pound sterling"),
+    HUF("HUF", "Hungarian forint"),
+    MTL("MTL", "Maltese lira"),
+    PLN("PLN", "Polish zloty"),
+    SEK("SEK", "Swedish krona"),
+    CHF("CHF", "Swiss franc"),
+    ISK("ISK", "Icelandic krona"),
+    NOK("NOK", "Norwegian krone"),
+    AUD("AUD", "Australian dollar"),
+    CAD("CAD", "Canadian dollar"),
+    HKD("HKD", "Hong Kong Dollar"),
+    IDR("IDR", "Indonesian rupiah"),
+    KRW("KRW", "Korean won"),
+    MYR("MYR", "Malaysian ringgit"),
+    NZD("NZD", "New Zealand dollar"),
+    PHP("PHP", "Philippine Peso"),
+    SGD("SGD", "Singapore dollar"),
+    THB("THB", "Thai baht"),
+    ZAR("ZAR", "South African rand"),
+    RUB("RUB", "Russian Ruble"),
+    UAH("UAH", "Ukraine Hryvnia"),
+    PEN("PEN", "Peruvian Nuevo Sol"),
+    CNY("CNY", "Chinese yuan"),
+    BGN("BGN", "Bulgarian lev"),
+    EEK("EEK", "Kroon"),
+    EGP("EGP", "Egyptian pound"),
+    HRK("HRK", "Croatian kuna"),
+    JOD("JOD", "Jordanian dinar"),
+    LBP("LBP", "Lebanese pound"),
+    LTL("LTL", "Lithuanian litas"),
+    LVL("LVL", "Latvian lats"),
+    MAD("MAD", "Moroccan dirham"),
+    RON("RON", "Romanian new leu"),
+    RSD("RSD", "Serbian dinar"),
+    SKK("SKK", "Slovak koruna"),
+    TND("TND", "Tunisian dinar"),
+    TRY("TRY", "New Turkish lira"),
+    BYR("BYR", "Belarusian Ruble"),
+    FJD("FJD", "Fijian dollar"),
+    MKD("MKD", "Macedonian denar"),
+    VEF("VEF", "Venezuelan bol&#xED;var"),
+    ADP("ADP", "Andorran peseta"),
+    AFN("AFN", "Afghan afghani"),
+    ALL("ALL", "Albania, Leke"),
+    AMD("AMD", "Armenian dram"),
+    ANG("ANG", "Netherlands Antilles, Guilders (also called Florin"),
+    AOA("AOA", "Angolan kwanza"),
+    ATS("ATS", "Austrian schilling"),
+    AWG("AWG", "Aruba, Guilders (also called Florins)"),
+    AZN("AZN", "Azerbaijan, New Manats"),
+    BAM("BAM", "Bosnia and Herzegovina, Convertible Marka"),
+    BBD("BBD", "Barbados, Dollars"),
+    BDT("BDT", "Bangladeshi Taka"),
+    BEF("BEF", "Belgian franc"),
+    BGL("BGL", "Bulgarian lev A/99"),
+    BIF("BIF", "Burundian franc"),
+    BMD("BMD", "Bermuda, Dollars"),
+    BOB("BOB", "Boliviano"),
+    BSD("BSD", "Bahamas, Dollars"),
+    BTN("BTN", "Bhutanese ngultrum"),
+    BZD("BZD", "Belize, Dollars"),
+    CDF("CDF", "Congolese franc"),
+    CRC("CRC", "Costa Rica, Col&#xF3;n"),
+    CUP("CUP", "Cuba, Pesos"),
+    CVE("CVE", "Cape Verde escudo"),
+    DEM("DEM", "German mark"),
+    DJF("DJF", "Djiboutian franc"),
+    DOP("DOP", "Dominican Republic, Pesos"),
+    DZD("DZD", "Algerian dinar"),
+    ECS("ECS", "Ecuadorian sucre"),
+    ESP("ESP", "Spanish peseta"),
+    ETB("ETB", "Ethiopian birr"),
+    FIM("FIM", "Finnish markka"),
+    FRF("FRF", "French franc"),
+    GEL("GEL", "Georgian lari"),
+    GHC("GHC", "Ghana, Cedis"),
+    GHS("GHS", "Ghana Cedi"),
+    GMD("GMD", "Gambian dalasi"),
+    GNF("GNF", "Guinean franc"),
+    GRD("GRD", "Greek drachma"),
+    GTQ("GTQ", "Guatemala, Quetzales"),
+    GYD("GYD", "Guyana, Dollars"),
+    HNL("HNL", "Honduras, Lempiras"),
+    HTG("HTG", "Haitian gourde"),
+    IEP("IEP", "Irish pound"),
+    IQD("IQD", "Iraqi dinar"),
+    ITL("ITL", "Italian lira"),
+    JMD("JMD", "Jamaica, Dollars"),
+    KES("KES", "Kenyan shilling"),
+    KGS("KGS", "Kyrgyzstani som"),
+    KMF("KMF", "Comoro franc"),
+    KYD("KYD", "Cayman Islands, Dollars"),
+    KZT("KZT", "Kazakhstani tenge"),
+    LAK("LAK", "Laos, Kips"),
+    LRD("LRD", "Liberia, Dollars"),
+    LSL("LSL", "Lesotho loti"),
+    LUF("LUF", "Luxembourg franc"),
+    MDL("MDL", "Moldovan leu"),
+    MGA("MGA", "Malagasy ariary"),
+    MMK("MMK", "Myanma kyat"),
+    MNT("MNT", "Mongolia, Tugriks"),
+    MRO("MRO", "Mauritanian ouguiya"),
+    MVR("MVR", "Maldivian rufiyaa"),
+    MWK("MWK", "Malawian kwacha"),
+    MZM("MZM", "Mozambican metical"),
+    MZN("MZN", "Mozambique, Meticais"),
+    NAD("NAD", "Namibian Dollar"),
+    NGN("NGN", "Nigeria, Nairas"),
+    NIO("NIO", "Nicaragua, Cordobas"),
+    NLG("NLG", "Netherlands guilder"),
+    PAB("PAB", "Panama, Balboa"),
+    PGK("PGK", "Papua New Guinean kina"),
+    PTE("PTE", "Portuguese escudo"),
+    PYG("PYG", "Guarani"),
+    ROL("ROL", "Romanian leu A/05"),
+    RWF("RWF", "Rwandan franc"),
+    SBD("SBD", "Solomon Islands, Dollars"),
+    SCR("SCR", "Seychelles, Rupees"),
+    SDD("SDD", "Sudanese dinar"),
+    SDG("SDG", "Sudanese pound"),
+    SDP("SDP", "Sudanese old pound"),
+    SLL("SLL", "Sierra Leonean leone"),
+    SOS("SOS", "Somalia, Shillings"),
+    SRD("SRD", "Suriname, Dollars"),
+    SRG("SRG", "Suriname guilder"),
+    STD("STD", "S&#xE3;o Tom&#xE9; and Pr&#xED;ncipe dobra"),
+    SVC("SVC", "El Salvador, Colones"),
+    SYP("SYP", "Syria, Pounds"),
+    SZL("SZL", "Lilangeni"),
+    TJS("TJS", "Tajikistani somoni"),
+    TMM("TMM", "Turkmenistani manat"),
+    TOP("TOP", "Tongan pa&#x2BB;anga"),
+    TRL("TRL", "Turkey, Liras"),
+    TZS("TZS", "Tanzanian shilling"),
+    UGX("UGX", "Ugandan shilling"),
+    UYU("UYU", "Uruguayan Peso"),
+    UZS("UZS", "Uzbekistan, Sums"),
+    VUV("VUV", "Vanuatu vatu"),
+    WST("WST", "Samoan tala"),
+    XAF("XAF", "CFA franc BEAC"),
+    XAG("XAG", "Silver (one troy ounce)"),
+    XAU("XAU", "Gold (one troy ounce)"),
+    XCD("XCD", "East Caribbean, Dollars"),
+    XEU("XEU", "European Currency Unit"),
+    XOF("XOF", "CFA Franc BCEAO"),
+    XPD("XPD", "Palladium (one troy ounce)"),
+    XPF("XPF", "CFP franc"),
+    XPT("XPT", "Platinum (one troy ounce)"),
+    YER("YER", "Yemen, Rials"),
+    ZMK("ZMK", "Zambian kwacha"),
+    ZMW("ZMW", "Zambian kwacha"),
+    SSP("SSP", "South Sudanese pound"),
+    BYN("BYN", "Belarusian Ruble"),
+    VES("VES", "Venezuelan Bolivar"),
+    AZM("AZM", "Azerbaijani manat")
+
+    private final String code
+    private final String name
+
+    private CurrencyCode(code, String name) {
+        this.code = code
+        this.name = name
+    }
+
+    String getName() {
+        return name
+    }
+
+    String getCode() {
+        return code
+    }
+
+    @Override
+    String toString() {
+        return code + ": " + name
+    }
+}
