@@ -1,6 +1,49 @@
 package al.rb.booking
-
+/**
+ * Details of a single contact person/point.
+ */
 class ContactInfo {
+
+    /**
+     * ContactInfo[@ContactProfileType] accepts the following values. Each value corresponds with a similarly named heading on the Contacts page in our extranet.
+     *
+     * general 	Primary point of contact for the property. 	Required
+     * contract 	Contact for contract matters. 	Optional
+     * reservations 	Contact for reservations. 	Optional
+     * invoices 	Contact for accounts payable. 	Required
+     * availability 	Contact for questions about availability. 	Optional
+     * site_content 	Contact for photos, descriptions, and other website content. 	Optional
+     * parity 	Contact for pricing and rate matters. 	Optional
+     * requests 	Contact for special requests. 	Optional
+     * central_reservations 	Contact for central reservations. Applies to properties that manage reservations from another location. 	Optional
+     * PhysicalLocation 	Address details for the property's physical location. 	Required
+     */
+    String contactProfileType
+    /**
+     * Contact addresses.
+     */
+    ArrayList<Address> addresses
+    /**
+     * Email addresses.
+     */
+    ArrayList<String> emails
+    /**
+     * Contact person names.
+     */
+    ArrayList<Name> names
+    /**
+     * Phone numbers.
+     */
+    ArrayList<Phone> phones
+
+    static constraints = {
+        contactProfileType nullable: true, inList: ['general', 'contract', 'reservations', 'invoices', 'availability', 'site_content', 'parity', 'requests', 'central_reservations', 'PhysicalLocation']
+        addresses nullable: true
+        emails nullable: true
+        names nullable: true
+        phones nullable: true
+    }
+
 /**
  *   <ContactInfo ContactProfileType="PhysicalLocation">
  *  *           <Addresses>
@@ -122,6 +165,4 @@ class ContactInfo {
  *  *           </Phones>
  *  *         </ContactInfo>
  */
-    static constraints = {
-    }
 }
