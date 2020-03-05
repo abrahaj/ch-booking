@@ -55,6 +55,11 @@ class Property {
 
     HotelInfo hotelInfo
 
+    /**
+     * Details of property facilities.
+     */
+    FacilityInfo facilityInfo
+
     static constraints = {
         name nullable: false
         id nullable: true
@@ -68,7 +73,7 @@ class Property {
         propertyLicenseType nullable: false
         affiliationInfo nullable: true
         areaInfo nullable: true
-
+        facilityInfo nullable: true
     }
     static mapping = {
         hotelDescriptiveContentNotifType defaultValue: "New"
