@@ -4,11 +4,48 @@ package al.rb.booking
  * https://connect.booking.com/user_guide/site/en-US/api-reference/Service/
  */
 class Service {
-    int code
+    HotelAmenityCode code
+    /**
+     * Specifies if the service exists, i.e. it sets if the facility is present or missing.
+     * 1 = yes(present), 2 = no(missing). Default: 1. Required if @Code="218" (children welcome).
+     */
     int existCode
-    int quantity
+    /**
+     * Specifies whether the service is included in the room price or comes at an extra charge.
+     */
     boolean included
-    static hasMany = [type:HotelAmenityCode, item:Item]
+    /**
+     * The price for the service, in the property's default currency.
+     * Required if @Code is 173 (breakfast), 6000 (lunch), 6001 (dinner).
+     */
+    int price
+    /**
+     * Details about service features.
+     */
+    ArrayList<Feature> features
+
+    /**
+     * The types of service offered.
+     * Currently used for breakfast services only.
+     */
+    ArrayList<Type> types
+    /**
+     * The items for the service offered.
+     * Currently used for breakfast services only.
+     */
+    ArrayList<Item> items
+
+    ArrayList<OperationTime> operationTimes
+
+    static constraints = {
+        code nullable: false
+        existCode nullable: true, inList: [1, 2]
+        price nullable: true
+        features nullable: true
+        types nullable: true
+        items nullable: true
+    }
+
 /**
  *  <Service Code="5" Included="false"/>
  *  *           <Service Code="173" Price="14" CurrencyCode="EUR">
@@ -51,6 +88,5 @@ class Service {
  *  *             </Features>
  *  *           </Service>
  */
-    static constraints = {
-    }
+
 }

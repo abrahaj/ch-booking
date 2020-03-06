@@ -5,5 +5,7 @@ package al.rb.booking
 class GeoPosition {
     float latitude, longitude
     static constraints = {
+        nullable: false
+        nullable: false
     }
 }

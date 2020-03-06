@@ -1,5 +1,7 @@
 package al.rb.booking
 
+import java.lang.reflect.Array
+
 class Property {
     /**
      * Name of the property as it should be displayed on Booking.com
@@ -52,13 +54,25 @@ class Property {
      * Contact information.
      */
     ArrayList<ContactInfo> contactInfo
-
+    /**
+     * Property details and descriptions.
+     */
     HotelInfo hotelInfo
 
     /**
      * Details of property facilities.
      */
     FacilityInfo facilityInfo
+    /**
+     * Property photos.
+     */
+    ArrayList<MultimediaDescription> multimediaDescriptions
+
+    /**
+     * Property policies around services, taxes, etc.
+     */
+    ArrayList<Policy> policies
+    TPAExtension tpaExtension
 
     static constraints = {
         name nullable: false
@@ -74,6 +88,9 @@ class Property {
         affiliationInfo nullable: true
         areaInfo nullable: true
         facilityInfo nullable: true
+        hotelInfo nullable: true
+        multimediaDescriptions  nullable: true
+
     }
     static mapping = {
         hotelDescriptiveContentNotifType defaultValue: "New"

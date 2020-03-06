@@ -1,10 +1,16 @@
 package al.rb.booking
 
 class HotelInfo {
-    static hasMany = [language: Language, service: Service]
     CategoryCode categoryCode
     GeoPosition position
+    ArrayList<Language> languages
+    ArrayList<Service> services
+    /**
+     * Information about the property's relationship to Booking.com.
+     */
+    ArrayList<OwnershipManagementInfo> ownershipManagementInfos
 
+    ArrayList<RelativePosition> relativePositions
 
 /**
  *  <CategoryCodes>
@@ -80,5 +86,11 @@ class HotelInfo {
  *  *         </TPA_Extensions>
  */
     static constraints = {
+        categoryCode nullable: true
+        languages nullable: true
+        position nullable: true
+        services nullable: true
+        ownershipManagementInfos nullable: false
+        relativePositions nullable: true
     }
 }

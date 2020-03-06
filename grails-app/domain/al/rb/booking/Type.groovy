@@ -1,8 +1,7 @@
 package al.rb.booking
 
-class Item {
-
-    ArrayList<BreakfastItemCode> code
+class Type {
+    BreakfastItemCode code
     static constraints = {
         code nullable: true
     }

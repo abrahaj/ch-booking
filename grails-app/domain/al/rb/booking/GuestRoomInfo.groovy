@@ -7,5 +7,6 @@ package al.rb.booking
 class GuestRoomInfo {
     int quantity
     static constraints = {
+        quantity nullable: false
     }
 }

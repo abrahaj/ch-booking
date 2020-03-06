@@ -5,6 +5,7 @@ package al.rb.booking
 class FacilityInfo {
     ArrayList<GuestRoom> guestRooms
     ArrayList<Restaurant> restaurants
+    TPAExtension tpaExtension
     static constraints = {
     }
 }

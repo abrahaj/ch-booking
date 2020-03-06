@@ -8,6 +8,6 @@ class HotelCategory {
     int existsCode
     static constraints = {
         propertyType nullable: false
-        existsCode nullable: false, range: 0..1
+        existsCode nullable: true, range: 0..1
     }
 }
