@@ -1,0 +1,7 @@
+import al.rb.booking.Property
+
+model {
+	Property property
+}
+
+json g.render(property, [resolveTemplate: false])

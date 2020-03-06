@@ -16,7 +16,7 @@ class InternetFeePolicy {
         internetCoverage nullable: true, inList: ['entire_property', 'public_areas', 'all_rooms', 'some_rooms', 'business_centre']
     }
     static mapping = {
-        type defaultValue: "wifi"
-        internetCoverage defaultValue: "entire_property"
+        type defaultValue: "'wifi'"
+        internetCoverage defaultValue: "'entire_property'"
     }
 }

@@ -1,7 +1,7 @@
 package al.rb.booking
 
 class GuaranteePayment {
-    BookingCancellationPolicyCode PolicyCode
+    BookingCancellationPolicyCode policyCode
     TPAExtension tpaExtension
     static constraints = {
     }

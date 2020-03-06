@@ -17,7 +17,7 @@ class Attraction {
         languageCode nullable: true
     }
     static mapping = {
-        unit defaultValue: "meters"
+        unit defaultValue: "'meters'"
     }
 
 }

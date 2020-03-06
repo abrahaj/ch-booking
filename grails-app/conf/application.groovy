@@ -43,3 +43,5 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 grails.plugin.springsecurity.rememberMe.persistent = true
 grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'al.rb.booking.PersistentLogin'
 
+grails.plugin.springsecurity.password.algorithm = 'bcrypt'
+

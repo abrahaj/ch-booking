@@ -23,8 +23,8 @@ class ParkingFeePolicy {
         parkingProperty nullable: true, inList: ['public', 'private']
     }
     static mapping = {
-        parkingType defaultValue: "on_site"
-        parkingReservation defaultValue: "not_available"
-        parkingProperty defaultValue: "public"
+        parkingType defaultValue: "'on_site'"
+        parkingReservation defaultValue: "'not_available'"
+        parkingProperty defaultValue: "'public'"
     }
 }

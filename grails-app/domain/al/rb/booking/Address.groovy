@@ -48,6 +48,6 @@ class Address {
         stateCode nullable: true, size: 2..2
     }
     static mapping = {
-        language defaultValue: "en"
+        language defaultValue: "'en'"
     }
 }

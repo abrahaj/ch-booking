@@ -1,6 +1,9 @@
 package al.rb.booking
 
-import java.lang.reflect.Array
+import groovy.xml.MarkupBuilder
+
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class Property {
     /**
@@ -11,7 +14,7 @@ class Property {
     /**
      * Your custom property ID, as assigned when you created the property.
      */
-    String id
+    String bookingId
     /**
      * The property licence number, as provided by the local authority.
      */
@@ -49,7 +52,7 @@ class Property {
      * Details about attractions and amenities near the property.
      */
     AreaInfo areaInfo
-    
+
     /**
      * Contact information.
      */
@@ -74,6 +77,16 @@ class Property {
     ArrayList<Policy> policies
     TPAExtension tpaExtension
 
+    def getXml() {
+        def xmlWriter = new StringWriter()
+        def xmlMarkup = new MarkupBuilder(xmlWriter)
+        def OTA_HotelDescriptiveContentNotifRQ = [xmlns               : "http://www.opentravel.org/OTA/2003/05", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                                                  PrimaryLangID       : "en-us", EchoToken: UUID.randomUUID(), TimeStamp: LocalDateTime.now().format(DateTimeFormatter.ISO_INSTANT),
+                                                  "xsi:schemaLocation": "http://www.opentravel.org/2014B/OTA_HotelDescriptiveContentNotifRQ.xsd", id: "OTA2014B", Version: "8.0", Target: "Production"]
+        xmlMarkup."OTA_HotelDescriptiveContentNotifRQ" = OTA_HotelDescriptiveContentNotifRQ
+    }
+
+
     static constraints = {
         name nullable: false
         id nullable: true
@@ -89,12 +102,12 @@ class Property {
         areaInfo nullable: true
         facilityInfo nullable: true
         hotelInfo nullable: true
-        multimediaDescriptions  nullable: true
+        multimediaDescriptions nullable: true
 
     }
     static mapping = {
-        hotelDescriptiveContentNotifType defaultValue: "New"
-        languageCode defaultValue: "en"
+        hotelDescriptiveContentNotifType defaultValue: "'New'"
+        languageCode defaultValue: "'en'"
     }
     /**
      * <?xml version="1.0" encoding="UTF-8"?>
