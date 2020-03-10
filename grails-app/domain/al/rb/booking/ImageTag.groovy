@@ -1,8 +1,8 @@
 package al.rb.booking
 
 class ImageTag {
-    ImageTagTypeCode id
+    ImageTagTypeCode idImageTagTypeCode
     static constraints = {
-        id nullable: false
+        idImageTagTypeCode nullable: false
     }
 }

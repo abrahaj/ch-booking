@@ -41,7 +41,7 @@ class Address {
         language nullable: true
         addressLine nullable: false, size: 1..255
         cityName nullable: true
-        countryName nullable: true, size: 2..2
+        countryName nullable: true
         hotelName nullable: true
         postalCode nullable: true
         stateProv nullable: true
@@ -49,5 +49,19 @@ class Address {
     }
     static mapping = {
         language defaultValue: "'en'"
+    }
+
+    def buildAddress(builder) {
+        if (language == null) {
+            this.language = LanguageCode.EN
+        }
+        builder."Address"("Language":this.language.getCode()) {
+            "AddressLine" this.addressLine
+            "CityName" this.cityName
+            "CountryName" this.countryName
+            "HotelName" this.hotelName
+            "PostalCode" this.postalCode
+            "StateProv"("StateCode":this.stateCode)
+        }
     }
 }

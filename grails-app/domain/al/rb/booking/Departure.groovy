@@ -6,14 +6,14 @@ class Departure {
     /**
      * The departure interval in minutes, if the transportation departs multiple times a day.
      */
-    int interval
+    int intervaliNMinutes
     /**
      * Specifies whether the transportation is available only by arrangement.
      * 1 = true, 0 false
      */
     short uponArrangement
     static constraints = {
-        interval nullable: true
+        intervaliNMinutes nullable: true
         uponArrangement nullable: true, inList: [0, 1]
     }
 }

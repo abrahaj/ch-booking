@@ -22,7 +22,7 @@ class ContactInfo {
     /**
      * Contact addresses.
      */
-    ArrayList<Address> addresses
+    //ArrayList<Address> addresses
     /**
      * Email addresses.
      */
@@ -48,8 +48,16 @@ class ContactInfo {
     }
 
     def buildContactInfo(builder) {
-        builder."ContactInfo" "ContactProfileType": contactProfileType
-        log.info("Called")
+        builder."ContactInfo"("ContactProfileType": contactProfileType) {
+            if (addresses != null) {
+                "Addresses" {
+                    addresses.each { ci ->
+                        ci.buildAddress builder
+                    }
+                }
+            }
+        }
+
     }
 /**
  *   <ContactInfo ContactProfileType="PhysicalLocation">

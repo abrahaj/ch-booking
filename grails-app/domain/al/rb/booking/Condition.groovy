@@ -11,4 +11,7 @@ class Condition {
     static constraints = {
         type nullable: false, inList: ['guest_brings_pet', 'guest_doesnt_clean_before_checkout', 'guest_smokes']
     }
+    static mapping = {
+        table "condition_table"
+    }
 }

@@ -166,12 +166,13 @@ class Property {
         multimediaDescriptions nullable: true
         policies nullable: true
         tpaExtension nullable: true
-        target nullable: false, inList: ['Test', 'Production']
+        target nullable: true, inList: ['Test', 'Production']
     }
 
     static mapping = {
         hotelDescriptiveContentNotifType defaultValue: "'New'"
         languageCode defaultValue: "'en'"
+        target defaultValue: "'Production'"
     }
     /**
      * <?xml version="1.0" encoding="UTF-8"?>
