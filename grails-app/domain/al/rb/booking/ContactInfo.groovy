@@ -36,14 +36,21 @@ class ContactInfo {
      */
     ArrayList<Phone> phones
 
+    static hasMany = [addresses: Address, emails: String, names: Name, phones: Phone]
+
     static constraints = {
-        contactProfileType nullable: true, inList: ['general', 'contract', 'reservations', 'invoices', 'availability', 'site_content', 'parity', 'requests', 'central_reservations', 'PhysicalLocation']
+        contactProfileType nullable: false, inList: ['general', 'contract', 'reservations', 'invoices', 'availability', 'site_content', 'parity', 'requests',
+                                                     'central_reservations', 'PhysicalLocation']
         addresses nullable: true
         emails nullable: true
         names nullable: true
         phones nullable: true
     }
 
+    def buildContactInfo(builder) {
+        builder."ContactInfo" "ContactProfileType": contactProfileType
+        log.info("Called")
+    }
 /**
  *   <ContactInfo ContactProfileType="PhysicalLocation">
  *  *           <Addresses>

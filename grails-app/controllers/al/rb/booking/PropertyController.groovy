@@ -8,7 +8,7 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
 @ReadOnly
-@Secured(["ROLE_ADMIN"])
+//@Secured(["ROLE_ADMIN"])
 class PropertyController {
 
     PropertyService propertyService
@@ -22,7 +22,11 @@ class PropertyController {
     }
 
     def show(Long id) {
-        respond propertyService.get(id)
+        println "REQUEST HERE " +request.getRemoteAddr()
+
+        Property property = propertyService.get(id)
+        log.info("HERE IS THE XML TO REQUEST " + property.getXml())
+        respond property
     }
 
     @Transactional

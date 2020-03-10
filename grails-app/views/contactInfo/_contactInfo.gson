@@ -1,0 +1,7 @@
+import al.rb.booking.ContactInfo
+
+model {
+    ContactInfo contactInfo
+}
+
+json g.render(contactInfo, [resolveTemplate: false, deep: true])

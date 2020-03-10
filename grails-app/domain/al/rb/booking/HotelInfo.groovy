@@ -11,6 +11,21 @@ class HotelInfo {
     ArrayList<OwnershipManagementInfo> ownershipManagementInfos
 
     ArrayList<RelativePosition> relativePositions
+///**
+// *   HotelName="The Best Hotel"
+// *       LanguageCode="en"
+// *       HotelDescriptiveContentNotifType="New"
+// * @param builder
+// * @return
+// */
+//    def buildXml(builder){
+//        title lang:'en', 'Groovy in Action'
+//            builder.address {
+//                street streetName
+//                houseNumber number
+//                buildCity builder, city
+//           }
+//    }
 
 /**
  *  <CategoryCodes>

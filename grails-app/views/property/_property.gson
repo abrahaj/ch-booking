@@ -4,4 +4,4 @@ model {
 	Property property
 }
 
-json g.render(property, [resolveTemplate: false])
+json g.render(property, [deep:true])

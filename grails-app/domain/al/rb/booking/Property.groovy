@@ -1,7 +1,14 @@
 package al.rb.booking
 
 import groovy.xml.MarkupBuilder
+import groovy.xml.StreamingMarkupBuilder
 
+import javax.xml.transform.OutputKeys
+import javax.xml.transform.Source
+import javax.xml.transform.Transformer
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.stream.StreamResult
+import javax.xml.transform.stream.StreamSource
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -56,7 +63,8 @@ class Property {
     /**
      * Contact information.
      */
-    ArrayList<ContactInfo> contactInfo
+    static hasMany = [contactInfos: ContactInfo]
+//    ArrayList<ContactInfo> contactInfo
     /**
      * Property details and descriptions.
      */
@@ -77,34 +85,90 @@ class Property {
     ArrayList<Policy> policies
     TPAExtension tpaExtension
 
+    /**
+     * Define the target of the request
+     * Specifies whether the request is to create a test property or a real property.
+     *
+     */
+    def target
+
     def getXml() {
         def xmlWriter = new StringWriter()
         def xmlMarkup = new MarkupBuilder(xmlWriter)
-        def OTA_HotelDescriptiveContentNotifRQ = [xmlns               : "http://www.opentravel.org/OTA/2003/05", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-                                                  PrimaryLangID       : "en-us", EchoToken: UUID.randomUUID(), TimeStamp: LocalDateTime.now().format(DateTimeFormatter.ISO_INSTANT),
-                                                  "xsi:schemaLocation": "http://www.opentravel.org/2014B/OTA_HotelDescriptiveContentNotifRQ.xsd", id: "OTA2014B", Version: "8.0", Target: "Production"]
-        xmlMarkup."OTA_HotelDescriptiveContentNotifRQ" = OTA_HotelDescriptiveContentNotifRQ
-    }
+        LocalDateTime now = LocalDateTime.now()
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        String timestamp = now.format(formatter)
+        def OTA_HotelDescriptiveContentNotifRQNS = [xmlns               : "http://www.opentravel.org/OTA/2003/05", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                                                    "xsi:schemaLocation": "http://www.opentravel.org/2014B/OTA_HotelDescriptiveContentNotifRQ.xsd",
+                                                    EchoToken           : UUID.randomUUID(), TimeStamp: timestamp, id: "OTA2014B", Version: "8.0"]
+        if (languageCode == null) {
+            languageCode = LanguageCode.EN
+        }
+        if (currencyCode == null) {
+            currencyCode = CurrencyCode.EUR
+        }
 
+        OTA_HotelDescriptiveContentNotifRQNS.put("PrimaryLangID", languageCode.getCode())
+        xmlMarkup."OTA_HotelDescriptiveContentNotifRQ"(OTA_HotelDescriptiveContentNotifRQNS)
+        def hotelDescriptiveContentAttributes = ["HotelName": this.name, "ID": this.id, "LanguageCode": this.languageCode.getCode(), "CurrencyCode": this.currencyCode.getCode()]
+
+        if (code != null) {
+            hotelDescriptiveContentAttributes.put("HotelCode", this.code)
+        }
+
+        if (hotelDescriptiveContentNotifType != null) {
+            hotelDescriptiveContentAttributes.put("HotelDescriptiveContentNotifType", this.hotelDescriptiveContentNotifType)
+        }
+        if (propertyLicenseNumber != null) {
+            hotelDescriptiveContentAttributes.put("PropertyLicenseNumber", propertyLicenseNumber)
+        }
+        if (propertyLicenseIssueDate != null) {
+            hotelDescriptiveContentAttributes.put("PropertyLicenseType", propertyLicenseIssueDate)
+        }
+        if (propertyLicenseType != null) {
+            hotelDescriptiveContentAttributes.put("PropertyLicenseIssueDate", propertyLicenseType)
+        }
+        def markupBuilder = new StreamingMarkupBuilder()
+        def xml = markupBuilder.bind { builder ->
+            OTA_HotelDescriptiveContentNotifRQ(OTA_HotelDescriptiveContentNotifRQNS) {
+                HotelDescriptiveContents {
+                    "HotelDescriptiveContent"(hotelDescriptiveContentAttributes)
+                    "ContactInfos" {
+                        contactInfos.each { ci ->
+                            ci.buildContactInfo builder
+                        }
+                    }
+                    if (affiliationInfo!=null){
+
+                    }
+                }
+            }
+        }
+        log.info("\r\n" + prettyFormat(xml.toString(), 2))
+        return xml.toString()
+    }
 
     static constraints = {
         name nullable: false
-        id nullable: true
+        bookingId nullable: true
         code nullable: true
         languageCode nullable: true
-        contactInfo nullable: false
+        contactInfos nullable: false
         hotelDescriptiveContentNotifType nullable: true, inList: ['New', 'Overlay']
         currencyCode nullable: false
         propertyLicenseNumber nullable: true
-        propertyLicenseIssueDate nullable: false
-        propertyLicenseType nullable: false
+        propertyLicenseIssueDate nullable: true
+        propertyLicenseType nullable: true
         affiliationInfo nullable: true
         areaInfo nullable: true
         facilityInfo nullable: true
         hotelInfo nullable: true
         multimediaDescriptions nullable: true
-
+        policies nullable: true
+        tpaExtension nullable: true
+        target nullable: false, inList: ['Test', 'Production']
     }
+
     static mapping = {
         hotelDescriptiveContentNotifType defaultValue: "'New'"
         languageCode defaultValue: "'en'"
@@ -294,4 +358,20 @@ class Property {
      *   </HotelDescriptiveContents>
      * </OTA_HotelDescriptiveContentNotifRQ>
      */
+
+    String prettyFormat(String input, int indent) {
+        try {
+            Source xmlInput = new StreamSource(new StringReader(input))
+            StringWriter stringWriter = new StringWriter()
+            StreamResult xmlOutput = new StreamResult(stringWriter)
+            TransformerFactory transformerFactory = TransformerFactory.newInstance()
+            transformerFactory.setAttribute("indent-number", indent)
+            Transformer transformer = transformerFactory.newTransformer()
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes")
+            transformer.transform(xmlInput, xmlOutput)
+            return xmlOutput.getWriter().toString()
+        } catch (Exception e) {
+            throw new RuntimeException(e) // simple exception handling, please review it
+        }
+    }
 }
