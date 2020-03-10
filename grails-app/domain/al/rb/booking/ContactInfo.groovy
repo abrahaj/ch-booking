@@ -26,17 +26,17 @@ class ContactInfo {
     /**
      * Email addresses.
      */
-    ArrayList<String> emails
+    //ArrayList<Email> emails
     /**
      * Contact person names.
      */
-    ArrayList<Name> names
+    //ArrayList<Name> names
     /**
      * Phone numbers.
      */
-    ArrayList<Phone> phones
+    //ArrayList<Phone> phones
 
-    static hasMany = [addresses: Address, emails: String, names: Name, phones: Phone]
+    static hasMany = [addresses: Address, emails: Email, names: Name, phones: Phone]
 
     static constraints = {
         contactProfileType nullable: false, inList: ['general', 'contract', 'reservations', 'invoices', 'availability', 'site_content', 'parity', 'requests',
@@ -53,6 +53,27 @@ class ContactInfo {
                 "Addresses" {
                     addresses.each { ci ->
                         ci.buildAddress builder
+                    }
+                }
+            }
+            if (emails!=null){
+                "Emails"{
+                    emails.each{em->
+                        em.buildEmail builder
+                    }
+                }
+            }
+            if (names!=null){
+                "Names"{
+                    names.each{nm->
+                        nm.buildXml builder
+                    }
+                }
+            }
+            if (phones!=null){
+                "Phones"{
+                    phones.each{ph->
+                        ph.buildXml builder
                     }
                 }
             }

@@ -20,7 +20,21 @@ class Phone {
 
     static constraints = {
         extension nullable: true
-        phoneNumber nullable: true, matches: "[0-9]+"
-        phoneTechType nullable: true
+        phoneNumber nullable: true, matches: "[0-9+]+"
+        phoneTechType nullable: true, inList: [1, 3, 5]
+    }
+
+    def buildXml(builder) {
+        def phoneAttributes = [:]
+        if (extension != null) {
+            phoneAttributes.put("Extension",extension)
+        }
+        if (phoneNumber != null) {
+            phoneAttributes.put("PhoneNumber", phoneNumber)
+        }
+        if (phoneTechType != null) {
+            phoneAttributes.put("PhoneTechType", phoneTechType)
+        }
+        builder."Phone"(phoneAttributes)
     }
 }
