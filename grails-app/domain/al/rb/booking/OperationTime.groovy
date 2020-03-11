@@ -29,4 +29,36 @@ class OperationTime {
         sat defaultValue: "0"
         sun defaultValue: "0"
     }
+
+    def buildXml(builder){
+        def aAttribute = [:]
+        if (mon){
+            aAttribute.put("Mon",1)
+        }
+        if (tue){
+            aAttribute.put("Tue",1)
+        }
+        if (weds){
+            aAttribute.put("Weds",1)
+        }
+        if (thur){
+            aAttribute.put("Thur",1)
+        }
+        if (sat){
+            aAttribute.put("Sat",1)
+        }
+        if (sun){
+            aAttribute.put("Sun",1)
+        }
+
+        if (start){
+            aAttribute.put("Start",start)
+        }
+        if (end){
+            aAttribute.put("End",end)
+        }
+        builder."OperationTime"(aAttribute){
+
+        }
+    }
 }

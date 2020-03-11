@@ -5,4 +5,7 @@ class DietaryOption {
     static constraints = {
         name nullable: false, inList: ["dairy free", "gluten free", "halal", "kosher", "vegan", "vegetarian"]
     }
+    def buildXml(builder) {
+        builder."DietaryOption"("Name": name)
+    }
 }

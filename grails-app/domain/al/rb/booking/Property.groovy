@@ -83,6 +83,7 @@ class Property {
      * Property policies around services, taxes, etc.
      */
     ArrayList<Policy> policies
+
     TPAExtension tpaExtension
 
     /**
@@ -139,7 +140,13 @@ class Property {
                         }
                     }
                     if (affiliationInfo!=null){
-
+                        affiliationInfo.buildXml builder
+                    }
+                    if (areaInfo!=null){
+                        areaInfo.buildXml builder
+                    }
+                    if (facilityInfo!=null){
+                        facilityInfo.buildXml builder
                     }
                 }
             }

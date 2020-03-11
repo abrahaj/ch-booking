@@ -19,5 +19,23 @@ class Attraction {
     static mapping = {
         unit defaultValue: "'meters'"
     }
-
+    def buildXml(builder) {
+        def aAttributes = [:]
+        if (attractionCategoryCode != null) {
+            aAttributes.put("AttractionCategoryCode",attractionCategoryCode.getCode())
+        }
+        if (name) {
+            aAttributes.put("AttractionName", name)
+        }
+        if (distance) {
+            aAttributes.put("Distance", distance)
+        }
+        if (unit) {
+            aAttributes.put("DistanceUnit", unit)
+        }
+        if (languageCode) {
+            aAttributes.put("LanguageCode", languageCode.getCode())
+        }
+        builder."Attraction"(aAttributes)
+    }
 }
