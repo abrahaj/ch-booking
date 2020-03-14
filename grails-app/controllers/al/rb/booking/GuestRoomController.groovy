@@ -2,6 +2,7 @@ package al.rb.booking
 
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
 import grails.converters.*
 import grails.validation.ValidationException
@@ -13,6 +14,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
 
+@Secured('permitAll')
 @ReadOnly
 class GuestRoomController {
     GuestRoomService guestRoomService
