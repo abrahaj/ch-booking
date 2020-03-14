@@ -1,0 +1,7 @@
+import al.rb.booking.GuestRoom
+
+model {
+    Iterable<GuestRoom> guestRooms
+}
+
+json tmpl.guestRoom(guestRooms ?: [])
