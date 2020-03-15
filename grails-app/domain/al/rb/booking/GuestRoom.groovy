@@ -25,6 +25,7 @@ class GuestRoom {
      * property ID
      */
     String hotelCode
+    Property property
     /**
      * Accepts: Initial, Active, Deactivated. Default: Initial
      * Specifies whether the request is to create (Initial), activate (Active), or deactivate the room type (Deactivated).
