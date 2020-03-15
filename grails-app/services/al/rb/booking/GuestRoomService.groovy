@@ -1,6 +1,5 @@
 package al.rb.booking
 
-import grails.gorm.transactions.Transactional
 
 @grails.gorm.services.Service(GuestRoom)
 interface GuestRoomService {
@@ -12,5 +11,5 @@ interface GuestRoomService {
 
     void delete(Serializable id)
 
-    GuestRoom save(GuestRoom property)
+    GuestRoom save(GuestRoom guestRoom)
 }

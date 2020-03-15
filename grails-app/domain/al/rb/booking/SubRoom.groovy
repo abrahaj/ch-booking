@@ -51,7 +51,7 @@ class SubRoom {
         if (amenities) {
             builder."Amenities" {
                 amenities.each { am ->
-                    am.buildXml(builder)
+                    am.buildXmlPerRoom(builder)
                 }
             }
         }

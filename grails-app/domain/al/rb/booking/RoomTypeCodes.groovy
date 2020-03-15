@@ -4,6 +4,7 @@ package al.rb.booking
  * https://connect.booking.com/user_guide/site/en-US/codes-bcrt/
  */
 enum RoomTypeCodes {
+    //TODO add all room type codes
     APARTMENT(1, "Apartment", "Separate unit with own bathroom and kitchen/kitchenette."),
     QUADRUPLE(4, "Quadruple", "Unit for 4 persons"),
     SUITE(5,"Suite","Only \"Suite\" units. \"Suite\" have to be mentioned in the Unit name.")

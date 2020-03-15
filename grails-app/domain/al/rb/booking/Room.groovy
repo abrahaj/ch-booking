@@ -83,7 +83,7 @@ class Room {
             roomAttributes.put("RoomID", roomID)
         }
         if(roomType){
-            roomAttributes.put("RoomType",roomType)
+            roomAttributes.put("RoomType",roomType.getCode())
         }
         if (sizeMeasurement){
             roomAttributes.put("SizeMeasurement",sizeMeasurement)

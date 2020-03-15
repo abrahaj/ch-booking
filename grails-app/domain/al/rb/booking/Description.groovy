@@ -27,12 +27,14 @@ class Description {
     }
 
     def buildXml(builder) {
-        if(imageTagID){
-           imageTagID = imageTagID.getCode()
+        def dAttributes = [:]
+        if (imageTagID) {
+            dAttributes.put("ImageTagID", imageTagID.getCode())
         }
+
         builder."Description"{
             "Text" text
-            "Image"("ImageTagID":this.imageTagID) image
+            "Image" (dAttributes,this.image)
         }
     }
 }

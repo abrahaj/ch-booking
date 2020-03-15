@@ -25,7 +25,6 @@ class GuestRoom {
      * property ID
      */
     String hotelCode
-    Property property
     /**
      * Accepts: Initial, Active, Deactivated. Default: Initial
      * Specifies whether the request is to create (Initial), activate (Active), or deactivate the room type (Deactivated).
@@ -96,9 +95,9 @@ class GuestRoom {
     def getXml(){
         def xmlWriter = new StringWriter()
         def xmlMarkup = new MarkupBuilder(xmlWriter)
-        LocalDateTime now = LocalDateTime.now()
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        String timestamp = now.format(formatter)
+//        LocalDateTime now = LocalDateTime.now()
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+//        String timestamp = now.format(formatter)
         def OTA_HotelInvNotifRQNS = [xmlns               : "http://www.opentravel.org/OTA/2003/05", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
                                      "xsi:schemaLocation": "http://www.opentravel.org/2014B/OTA_HotelInvNotifRQ.xsd",
                                      id: "OTA2014B", Version: "6.000", TransactionIdentifier:"5"]
@@ -108,9 +107,7 @@ class GuestRoom {
         xmlMarkup."OTA_HotelInvNotifRQ"(OTA_HotelInvNotifRQNS)
         def sellableProductsAttributes = [:]
         if (hotelCode) {
-            Property prop = Property.get(hotelCode.toInteger())
-            property = prop
-            sellableProductsAttributes.put("HotelCode", prop.id.toString())
+            sellableProductsAttributes.put("HotelCode", this.hotelCode)
         }
         def sellableProductAttributes = [:]
         if (invStatusType) {
@@ -121,29 +118,30 @@ class GuestRoom {
         def xml = markupBuilder.bind { builder ->
             OTA_HotelInvNotifRQ(OTA_HotelInvNotifRQNS) {
                 SellableProducts (sellableProductsAttributes) {
-                    "SellableProduct "(sellableProductsAttributes)
-                    builder."GuestRoom" {
-                        if(occupancy){
-                            occupancy.buildXml(builder)
-                        }
-                        if(room){
-                            room.buildXml(builder)
-                        }
-                        if (amenities) {
-                            builder."Amenities" {
-                                amenities.each { am ->
-                                    am.buildXml(builder)
+                    SellableProduct(sellableProductAttributes) {
+                        builder."GuestRoom" {
+                            if (occupancy) {
+                                occupancy.buildXml(builder)
+                            }
+                            if (room) {
+                                room.buildXml(builder)
+                            }
+                            if (amenities) {
+                                builder."Amenities" {
+                                    amenities.each { am ->
+                                        am.buildXmlPerRoom(builder)
+                                    }
                                 }
                             }
-                        }
-                        if(description){
-                            description.buildXml(builder)
-                        }
-                        if (roomLocation) {
-                            roomLocation.buildXml(builder)
-                        }
-                        if(tpaExtension){
-                            tpaExtension.buildXmlPerGuestRoom()
+                            if (description) {
+                                description.buildXml(builder)
+                            }
+                            if (roomLocation) {
+                                roomLocation.buildXml(builder)
+                            }
+                            if (tpaExtension) {
+                                tpaExtension.buildXmlPerGuestRoom()
+                            }
                         }
                     }
                 }
