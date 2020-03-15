@@ -28,7 +28,7 @@ class Amenity {
      * Accepted only when RMA code is a bed type. Accepts: 1 (standard arrangement), 2 (alternative arrangement)
      * Details of a room-level amenity.
      */
-    int configuration
+    ConfigurationCode configuration
 
 
     static constraints = {
@@ -55,7 +55,7 @@ class Amenity {
             aAttributes.put("AmenityCode", amenityCode.getCode())
         }
         if (configuration) {
-            aAttributes.put("Configuration", configuration)
+            aAttributes.put("Configuration", configuration.getCode())
         }
         if (value) {
             aAttributes.put("Value", value)

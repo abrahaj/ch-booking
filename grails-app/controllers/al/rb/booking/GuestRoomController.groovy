@@ -1,22 +1,19 @@
 package al.rb.booking
 
-import grails.gorm.transactions.ReadOnly
-import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
-import grails.rest.*
-import grails.converters.*
 import grails.validation.ValidationException
-
 import static org.springframework.http.HttpStatus.CREATED
-import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY
 
+import grails.gorm.transactions.ReadOnly
+import grails.gorm.transactions.Transactional
 @Secured('permitAll')
 @ReadOnly
 class GuestRoomController {
+
     GuestRoomService guestRoomService
 
     static responseFormats = ['json', 'xml']
@@ -24,14 +21,14 @@ class GuestRoomController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond guestRoomService.list(params), model: [guestRoomCount: guestRoomService.count()]
+        respond guestRoomService.list(params), model:[guestRoomCount: guestRoomService.count()]
     }
 
     def show(Long id) {
         println "REQUEST HERE " +request.getRemoteAddr()
         GuestRoom guestRoom = guestRoomService.get(id)
         log.info("HERE IS THE XML TO REQUEST " + guestRoom.getXml())
-        respond guestRoom
+        respond guestRoomService.get(id)
     }
 
     @Transactional
@@ -53,7 +50,7 @@ class GuestRoomController {
             return
         }
 
-        respond guestRoom, [status: CREATED, view: "show"]
+        respond guestRoom, [status: CREATED, view:"show"]
     }
 
     @Transactional
@@ -75,7 +72,7 @@ class GuestRoomController {
             return
         }
 
-        respond guestRoom, [status: OK, view: "show"]
+        respond guestRoom, [status: OK, view:"show"]
     }
 
     @Transactional

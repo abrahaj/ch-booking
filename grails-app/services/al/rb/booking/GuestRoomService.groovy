@@ -1,8 +1,10 @@
 package al.rb.booking
 
+import grails.gorm.services.Service
 
-@grails.gorm.services.Service(GuestRoom)
+@Service(GuestRoom)
 interface GuestRoomService {
+
     GuestRoom get(Serializable id)
 
     List<GuestRoom> list(Map args)
@@ -12,4 +14,5 @@ interface GuestRoomService {
     void delete(Serializable id)
 
     GuestRoom save(GuestRoom guestRoom)
+
 }

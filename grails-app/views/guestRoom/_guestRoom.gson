@@ -1,7 +1,7 @@
 import al.rb.booking.GuestRoom
 
 model {
-    GuestRoom guestRoom
+	GuestRoom guestRoom
 }
 
-json g.render(guestRoom, [deep:true])
+json g.render(guestRoom, [resolveTemplate: false])
