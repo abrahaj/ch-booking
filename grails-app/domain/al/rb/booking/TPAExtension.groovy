@@ -22,7 +22,8 @@ class TPAExtension {
 //    ArrayList<Condition> conditions
 //    ArrayList<StandardPhrase> standardPhrases
 
-    static hasMany = [ambiances: Ambiance, dietaryOptions: DietaryOption, routes: Route, imageTags: ImageTag, conditions: Condition, standardPhrases: StandardPhrase]
+    static hasMany = [ambiances: Ambiance, dietaryOptions: DietaryOption, routes: Route, imageTags: ImageTag, conditions: Condition, standardPhrases: StandardPhrase,
+    subRooms:SubRoom,licenseInfos:LicenseInfo]
     static constraints = {
         hotelierMessage nullable: true
         ambiances nullable: true
@@ -42,6 +43,8 @@ class TPAExtension {
         cancellationGracePeriod nullable: true
         totalNumberOfFloors nullable: true
         pricingType nullable: true
+        subRooms nullable: true
+        licenseInfos nullable: true
     }
 
     def buildXml(builder) {
@@ -60,6 +63,25 @@ class TPAExtension {
                 builder."DietaryOptions"{
                     dietaryOptions.each{dop->
                         dop.buildXml(builder)
+                    }
+                }
+            }
+        }
+    }
+
+    def buildXmlPerGuestRoom(builder) {
+        builder."TPAExtensions" {
+            if (subRooms){
+                builder."SubRooms"{
+                    subRooms.each{sr->
+                        sr.buildXml(builder)
+                    }
+                }
+            }
+            if (licenseInfos){
+                builder."LicenseInfos"{
+                    licenseInfos.each{li->
+                        li.buildXml(builder)
                     }
                 }
             }
