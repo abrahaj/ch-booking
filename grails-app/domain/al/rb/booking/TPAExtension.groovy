@@ -87,4 +87,12 @@ class TPAExtension {
             }
         }
     }
+
+    def buildXmlPerHotelProduct(builder){
+        builder."TPAExtensions" {
+            if(pricingType){
+                pricingType.buildXml(builder)
+            }
+        }
+    }
 }
