@@ -78,7 +78,7 @@ hibernate:
         use_query_cache: false
 dataSource:
     username: root
-    password: 'ZanaZana'
+    password: 'arileva'
 
 environments:
     development:

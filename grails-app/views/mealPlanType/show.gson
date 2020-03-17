@@ -1,0 +1,7 @@
+import al.rb.booking.MealPlanType
+
+model {
+	MealPlanType mealPlanType
+}
+
+json tmpl.mealPlanType(mealPlanType)

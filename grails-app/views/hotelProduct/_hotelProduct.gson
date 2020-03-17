@@ -1,0 +1,7 @@
+import al.rb.booking.HotelProduct
+
+model {
+	HotelProduct hotelProduct
+}
+
+json g.render(hotelProduct, [resolveTemplate: false])
