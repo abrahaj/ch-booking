@@ -28,8 +28,10 @@ class HotelProductController {
         println "REQUEST HERE " +request.getRemoteAddr()
         HotelProduct hotelProduct = hotelProductService.get(id)
         log.info("HOTEL PRODUCT XML TO REQUEST " + hotelProduct.getXml())
-        RatePlan ratePlan = RatePlan.get(hotelProduct.ratesPlan.first().id)
-        log.info("RATE PLAN XML TO REQUEST " + ratePlan.getXml())
+        hotelProduct.ratesPlan.each { rp->
+            RatePlan ratePlan = RatePlan.get(rp.id)
+            log.info("RATE PLAN XML TO REQUEST " + ratePlan.getXml())
+        }
         respond hotelProductService.get(id)
     }
 
