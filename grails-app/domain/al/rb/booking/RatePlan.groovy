@@ -47,6 +47,7 @@ class RatePlan {
         ratePlanNotifType nullable: false, inList: ["New", "Overlay", "Remove", "Activate"]
         ratePlanCode nullable: true
         ratePlanID nullable: true
+        hotelCode nullable: true
     }
 
     static mapping = {
@@ -86,6 +87,8 @@ class RatePlan {
         def ratePlans = [:]
         if (hotelCode) {
             ratePlans.put("HotelCode", this.hotelCode)
+        }else {
+            ratePlans.put("HotelCode", this..property.code.toString())
         }
         def ratePlan = [:]
         if (ratePlanNotifType) {

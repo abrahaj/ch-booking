@@ -1,0 +1,7 @@
+import al.rb.booking.Availability
+
+model {
+	Availability availability
+}
+
+json tmpl.availability(availability)

@@ -69,7 +69,7 @@ class GuestRoom {
 
     static constraints = {
         target nullable: false, inList: ["Test","Production"]
-        hotelCode nullable: false
+        hotelCode nullable: true
         invStatusType nullable: true
         invNotifType nullable: true
         invCode nullable: true
@@ -109,6 +109,8 @@ class GuestRoom {
         def sellableProductsAttributes = [:]
         if (hotelCode) {
             sellableProductsAttributes.put("HotelCode", this.hotelCode)
+        }else {
+            sellableProductsAttributes.put("HotelCode", this.property.code.toString())
         }
         def sellableProductAttributes = [:]
         if (invStatusType) {

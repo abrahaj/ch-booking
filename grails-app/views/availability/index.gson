@@ -1,0 +1,8 @@
+import al.rb.booking.Availability
+
+model {
+	Iterable<Availability> availabilityList
+}
+
+json tmpl.availability(availabilityList ?: [])
+
