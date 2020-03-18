@@ -9,7 +9,7 @@ class UrlMappings {
         post "/$controller(.$format)?"(action: "save")
         put "/$controller/$id(.$format)?"(action: "update")
         patch "/$controller/$id(.$format)?"(action: "patch")
-
+        get "/$controller/$id(.$format)/rooms?"(action: "rooms")
         "/"(controller: 'application', action: 'index')
         "/index"(controller: 'application', action: 'index')
         "/login/auth"(controller: 'login', action: 'auth')

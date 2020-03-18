@@ -29,6 +29,19 @@ class PropertyController {
         respond property
     }
 
+    def rooms(Long id) {
+        println "REQUEST HERE " +request.getRemoteAddr()
+
+        Property property = propertyService.get(id)
+        List<GuestRoom> guest = GuestRoom.findAllByProperty(property)
+        List<Room> rooms=[]
+        guest.each {g->
+            rooms << g.room
+        }
+        //log.info("HERE IS THE XML TO REQUEST " + property.getXml())
+        respond rooms
+    }
+
     @Transactional
     def save(Property property) {
         if (property == null) {
