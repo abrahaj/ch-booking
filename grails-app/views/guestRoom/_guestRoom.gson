@@ -4,4 +4,4 @@ model {
 	GuestRoom guestRoom
 }
 
-json g.render(guestRoom, [resolveTemplate: false])
+json g.render(guestRoom, [resolveTemplate: false,deep:true])
