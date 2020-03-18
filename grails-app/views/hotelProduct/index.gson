@@ -1,0 +1,8 @@
+import al.rb.booking.HotelProduct
+
+model {
+	Iterable<HotelProduct> hotelProductList
+}
+
+json tmpl.hotelProduct(hotelProductList ?: [])
+
