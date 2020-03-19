@@ -12,71 +12,67 @@ import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 @Secured('permitAll')
 @ReadOnly
-class HotelProductController {
+class AvailabilityController {
 
-    HotelProductService hotelProductService
+    AvailabilityService availabilityService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond hotelProductService.list(params), model:[hotelProductCount: hotelProductService.count()]
+        respond availabilityService.list(params), model:[availabilityCount: availabilityService.count()]
     }
 
     def show(Long id) {
         println "REQUEST HERE " +request.getRemoteAddr()
-        HotelProduct hotelProduct = hotelProductService.get(id)
-        log.info("HOTEL PRODUCT XML TO REQUEST " + hotelProduct.getXml())
-        hotelProduct.ratesPlan.each { rp->
-            RatePlan ratePlan = RatePlan.get(rp.id)
-            log.info("RATE PLAN XML TO REQUEST " + ratePlan.getXml())
-        }
-        respond hotelProductService.get(id)
+        Availability availability = availabilityService.get(id)
+        log.info("AVAILABILITY XML TO REQUEST " + availability.getXml())
+        respond availabilityService.get(id)
     }
 
     @Transactional
-    def save(HotelProduct hotelProduct) {
-        if (hotelProduct == null) {
+    def save(Availability availability) {
+        if (availability == null) {
             render status: NOT_FOUND
             return
         }
-        if (hotelProduct.hasErrors()) {
+        if (availability.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond hotelProduct.errors
+            respond availability.errors
             return
         }
 
         try {
-            hotelProductService.save(hotelProduct)
+            availabilityService.save(availability)
         } catch (ValidationException e) {
-            respond hotelProduct.errors
+            respond availability.errors
             return
         }
 
-        respond hotelProduct, [status: CREATED, view:"show"]
+        respond availability, [status: CREATED, view:"show"]
     }
 
     @Transactional
-    def update(HotelProduct hotelProduct) {
-        if (hotelProduct == null) {
+    def update(Availability availability) {
+        if (availability == null) {
             render status: NOT_FOUND
             return
         }
-        if (hotelProduct.hasErrors()) {
+        if (availability.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond hotelProduct.errors
+            respond availability.errors
             return
         }
 
         try {
-            hotelProductService.save(hotelProduct)
+            availabilityService.save(availability)
         } catch (ValidationException e) {
-            respond hotelProduct.errors
+            respond availability.errors
             return
         }
 
-        respond hotelProduct, [status: OK, view:"show"]
+        respond availability, [status: OK, view:"show"]
     }
 
     @Transactional
@@ -86,7 +82,7 @@ class HotelProductController {
             return
         }
 
-        hotelProductService.delete(id)
+        availabilityService.delete(id)
 
         render status: NO_CONTENT
     }

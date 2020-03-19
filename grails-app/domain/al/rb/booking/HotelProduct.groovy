@@ -27,7 +27,7 @@ class HotelProduct {
     /**
      * Specifies the ID of the property you create a rate plan for.
      */
-    //String hotelCode
+    String hotelCode
     Property property
     /**
      * Specifies the type of action being performed on the product.
@@ -52,6 +52,7 @@ class HotelProduct {
     static constraints = {
         languageCode nullable: true
         target nullable: false, inList: ["Test", "Production"]
+        hotelCode nullable: true
         productNotifType nullable: false, inList: ["New", "Remove"]
         policyinfo nullable: true
         tpaExtension nullable: true
@@ -73,9 +74,12 @@ class HotelProduct {
         OTA_HotelProductNotifRQNS.put("Target", target)
         xmlMarkup."OTA_HotelProductNotifRQ"(OTA_HotelProductNotifRQNS)
         def hotelProducts = [:]
-        if (property) {
-            hotelProducts.put("HotelCode", property.id.toString())
+        if (hotelCode) {
+            hotelProducts.put("HotelCode", hotelCode)
+        }else {
+            hotelProducts.put("HotelCode", property.code.toString())
         }
+
         def hotelProduct = [:]
         if (productNotifType) {
             hotelProduct.put("ProductNotifType", this.productNotifType)

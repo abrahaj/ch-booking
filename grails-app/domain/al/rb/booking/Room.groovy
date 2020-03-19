@@ -47,8 +47,14 @@ class Room {
      * Accepts: sqm (square metres), sqft (square feet). Default: sqm
      */
     String sizeMeasurementUnit
-
-
+    /**
+     * The Booking.com room type ID.
+     */
+    String roomTypeCode
+    /**
+     * Specifies the maximum number of guests for all combinations of room type and rate plan in the product.
+     */
+    int  maxOccupancy
 
     static constraints = {
         licenseNumber nullable: true
@@ -58,6 +64,7 @@ class Room {
         roomType nullable: true
         sizeMeasurement nullable: false
         sizeMeasurementUnit nullable: false, inList: ["sqm","sqft"]
+        roomTypeCode nullable: true
     }
 
     static mapping = {
