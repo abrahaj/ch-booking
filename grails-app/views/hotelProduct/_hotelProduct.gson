@@ -4,4 +4,4 @@ model {
 	HotelProduct hotelProduct
 }
 
-json g.render(hotelProduct, [resolveTemplate: false])
+json g.render(hotelProduct, [resolveTemplate: false, deep:true])
