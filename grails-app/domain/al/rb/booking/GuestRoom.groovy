@@ -68,7 +68,7 @@ class GuestRoom {
     TPAExtension tpaExtension
 
     static constraints = {
-        target nullable: false, inList: ["Test","Production"]
+        target nullable: true, inList: ["Test","Production"]
         hotelCode nullable: true
         invStatusType nullable: true
         invNotifType nullable: true
@@ -79,6 +79,11 @@ class GuestRoom {
         room nullable: true
         roomLocation nullable: true
         tpaExtension nullable: true
+        property nullable: true
+    }
+
+    static mapping = {
+        target defaultValue: "'Production'"
     }
 
     def buildXml(builder) {
