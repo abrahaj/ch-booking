@@ -1,5 +1,6 @@
 package al.rb.booking
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.CREATED
@@ -37,20 +38,42 @@ class GuestRoomController {
             render status: NOT_FOUND
             return
         }
+        def statusCode
+        def errorString
         if (guestRoom.hasErrors()) {
+            errorString = guestRoom.errors
+            statusCode = StatusCodeRB.FAILED_ROOM
             transactionStatus.setRollbackOnly()
             respond guestRoom.errors
             return
         }
 
         try {
-            guestRoomService.save(guestRoom)
+            if(guestRoom.property == null){
+                errorString = guestRoom.errors
+                statusCode = StatusCodeRB.FAILED_ROOM
+                transactionStatus.setRollbackOnly()
+                respond guestRoom.errors
+                return
+            }else {
+                guestRoomService.save(guestRoom)
+                statusCode = StatusCodeRB.OK_ROOM
+            }
         } catch (ValidationException e) {
+            errorString = guestRoom.errors
+            statusCode = StatusCodeRB.FAILED_ROOM
             respond guestRoom.errors
             return
         }
+        def responseData = [
+                'guestRoom' : guestRoom,
+                'code': statusCode.getCode(),
+                'status': statusCode.getDescription(),
+                'error': errorString
+        ]
+        render responseData as JSON
 
-        respond guestRoom, [status: CREATED, view:"show"]
+       // respond guestRoom, [status: CREATED, view:"show"]
     }
 
     @Transactional

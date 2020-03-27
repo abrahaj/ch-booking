@@ -1,5 +1,6 @@
 package al.rb.booking
 
+import grails.converters.JSON
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
@@ -48,7 +49,11 @@ class PropertyController {
             render status: NOT_FOUND
             return
         }
+        def statusCode
+        def errorString
         if (property.hasErrors()) {
+            errorString = property.errors
+            statusCode = StatusCodeRB.FAILED_PROPERTY
             transactionStatus.setRollbackOnly()
             respond property.errors
             return
@@ -56,12 +61,20 @@ class PropertyController {
 
         try {
             propertyService.save(property)
+            statusCode = StatusCodeRB.OK_PROPERTY
         } catch (ValidationException e) {
+            errorString = property.errors
+            statusCode = StatusCodeRB.FAILED_PROPERTY
             respond property.errors
             return
         }
-
-        respond property, [status: CREATED, view: "show"]
+        def responseData = [
+                'property' : property,
+                'code': statusCode.getCode(),
+                'status': statusCode.getDescription(),
+                'error': errorString
+        ]
+        render responseData as JSON //, [status: CREATED, view: "show"]
     }
 
     @Transactional
