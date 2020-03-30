@@ -39,7 +39,7 @@ class HotelProduct {
      * Rate plans in the product.
      * Mealplans in the product.
      */
-    static hasMany = [roomTypes: RoomType, ratesPlan: RatePlan, mealPlan: MealPlanType]
+    static hasMany = [roomTypes: Room, ratesPlan: RatePlan, mealPlan: MealPlanType]
     /**
      * Cancellation and booking policies for the product.
      */

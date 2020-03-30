@@ -23,7 +23,7 @@ class PropertyController {
     }
 
     def show(Long id) {
-        println "REQUEST HERE " +request.getRemoteAddr()
+        log.info("REQUEST HERE " +request.getRemoteAddr())
 
         Property property = propertyService.get(id)
         log.info("HERE IS THE XML TO REQUEST " + property.getXml())
@@ -31,7 +31,7 @@ class PropertyController {
     }
 
     def rooms(Long id) {
-        println "REQUEST HERE " +request.getRemoteAddr()
+        log.info("REQUEST HERE " +request.getRemoteAddr())
 
         Property property = propertyService.get(id)
         List<GuestRoom> guest = GuestRoom.findAllByProperty(property)

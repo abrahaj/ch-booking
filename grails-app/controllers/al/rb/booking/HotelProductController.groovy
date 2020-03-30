@@ -25,7 +25,7 @@ class HotelProductController {
     }
 
     def show(Long id) {
-        println "REQUEST HERE " +request.getRemoteAddr()
+        log.info("REQUEST HERE " +request.getRemoteAddr())
         HotelProduct hotelProduct = hotelProductService.get(id)
         log.info("HOTEL PRODUCT XML TO REQUEST " + hotelProduct.getXml())
         hotelProduct.ratesPlan.each { rp->

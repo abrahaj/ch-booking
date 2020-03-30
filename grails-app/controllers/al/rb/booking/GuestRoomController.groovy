@@ -26,7 +26,7 @@ class GuestRoomController {
     }
 
     def show(Long id) {
-        println "REQUEST HERE " +request.getRemoteAddr()
+        log.info("REQUEST HERE " +request.getRemoteAddr())
         GuestRoom guestRoom = guestRoomService.get(id)
         log.info("HERE IS THE XML TO REQUEST " + guestRoom.getXml())
         respond guestRoomService.get(id)
