@@ -1,0 +1,7 @@
+import al.rb.booking.Rates
+
+model {
+	Rates rates
+}
+
+json tmpl.rates(rates)

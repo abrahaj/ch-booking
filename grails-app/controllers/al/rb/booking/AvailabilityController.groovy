@@ -25,7 +25,7 @@ class AvailabilityController {
     }
 
     def show(Long id) {
-        println "REQUEST HERE " +request.getRemoteAddr()
+        log.info("REQUEST HERE " +request.getRemoteAddr())
         Availability availability = availabilityService.get(id)
         log.info("AVAILABILITY XML TO REQUEST " + availability.getXml())
         respond availabilityService.get(id)

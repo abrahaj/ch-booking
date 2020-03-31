@@ -99,8 +99,8 @@ class RatePlan {
         def xml = markupBuilder.bind { builder ->
             OTA_HotelRatePlanNotifRQ(OTA_HotelRatePlanNotifRQNS) {
                 RatePlans (ratePlans) {
-                    RatePlan(ratePlan) {
-                        Description("name":this.name)
+                    "RatePlan"(ratePlan) {
+                        Description("Name":this.name)
                     }
                 }
             }

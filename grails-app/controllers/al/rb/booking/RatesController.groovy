@@ -12,67 +12,67 @@ import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 @Secured('permitAll')
 @ReadOnly
-class RatePlanController {
+class RatesController {
 
-    RatePlanService ratePlanService
+    RatesService ratesService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond ratePlanService.list(params), model:[ratePlanCount: ratePlanService.count()]
+        respond ratesService.list(params), model:[ratesCount: ratesService.count()]
     }
 
     def show(Long id) {
-        log.info( "REQUEST HERE " +request.getRemoteAddr())
-        RatePlan ratePlan = ratePlanService.get(id)
-        log.info("RATE PLAN XML TO REQUEST " + ratePlan.getXml())
-        respond ratePlanService.get(id)
+        log.info("REQUEST HERE " +request.getRemoteAddr())
+        Rates rates = ratesService.get(id)
+        log.info("RATE PLAN XML TO REQUEST " + rates.getXml())
+        respond ratesService.get(id)
     }
 
     @Transactional
-    def save(RatePlan ratePlan) {
-        if (ratePlan == null) {
+    def save(Rates rates) {
+        if (rates == null) {
             render status: NOT_FOUND
             return
         }
-        if (ratePlan.hasErrors()) {
+        if (rates.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond ratePlan.errors
+            respond rates.errors
             return
         }
 
         try {
-            ratePlanService.save(ratePlan)
+            ratesService.save(rates)
         } catch (ValidationException e) {
-            respond ratePlan.errors
+            respond rates.errors
             return
         }
 
-        respond ratePlan, [status: CREATED, view:"show"]
+        respond rates, [status: CREATED, view:"show"]
     }
 
     @Transactional
-    def update(RatePlan ratePlan) {
-        if (ratePlan == null) {
+    def update(Rates rates) {
+        if (rates == null) {
             render status: NOT_FOUND
             return
         }
-        if (ratePlan.hasErrors()) {
+        if (rates.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond ratePlan.errors
+            respond rates.errors
             return
         }
 
         try {
-            ratePlanService.save(ratePlan)
+            ratesService.save(rates)
         } catch (ValidationException e) {
-            respond ratePlan.errors
+            respond rates.errors
             return
         }
 
-        respond ratePlan, [status: OK, view:"show"]
+        respond rates, [status: OK, view:"show"]
     }
 
     @Transactional
@@ -82,7 +82,7 @@ class RatePlanController {
             return
         }
 
-        ratePlanService.delete(id)
+        ratesService.delete(id)
 
         render status: NO_CONTENT
     }

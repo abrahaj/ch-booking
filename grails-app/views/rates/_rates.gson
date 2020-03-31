@@ -1,0 +1,7 @@
+import al.rb.booking.Rates
+
+model {
+	Rates rates
+}
+
+json g.render(rates, [resolveTemplate: false])
