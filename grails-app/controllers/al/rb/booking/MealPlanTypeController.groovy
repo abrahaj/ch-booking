@@ -46,7 +46,12 @@ class MealPlanTypeController {
             respond mealPlanType.errors
             return
         }
-
+//        def responseData = [
+//                'guestRoom' : guestRoom,
+//                'code': statusCode.getCode(),
+//                'status': statusCode.getDescription(),
+//                'error': errorString
+//        ]
         respond mealPlanType, [status: CREATED, view:"show"]
     }
 

@@ -1,5 +1,6 @@
 package al.rb.booking
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.CREATED
@@ -32,25 +33,34 @@ class AvailabilityController {
     }
 
     @Transactional
-    def save(Availability availability) {
-        if (availability == null) {
-            render status: NOT_FOUND
-            return
+    def save() {
+        def availabilities = request.getJSON()
+        def responseData = null
+        availabilities.each {availability->
+            def property = Property.findByBookingId(availability.property)
+            def ratePlan = RatePlan.findByNameAndProperty(availability.ratePlan,property)
+            def room = Room.findByRoomID(availability.room)
+            def statusCode
+            def errorString
+            try{
+             def ava = new Availability(target: availability.target, startDate: availability.startDate, endDate: availability.endDate,
+                     room: room, ratePlan: ratePlan, bookingLimit: availability.bookingLimit, minTime: availability.minTime, minMessageType: availability.minMessageType)
+                ava.save(flush:true, failOnError:true)
+                ava.locatorId = (int) ava.id
+                ava.save(flush:true, failOnError:true)
+                statusCode = StatusCodeRB.OK_AVAILABILITY
+            }catch(Exception e){
+                errorString = e.getLocalizedMessage()
+                statusCode = StatusCodeRB.FAILED_RATE
+            }
+            responseData = [
+                    'availability' : availability,
+                    'code': statusCode.getCode(),
+                    'status': statusCode.getDescription(),
+                    'error': errorString
+            ]
         }
-        if (availability.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond availability.errors
-            return
-        }
-
-        try {
-            availabilityService.save(availability)
-        } catch (ValidationException e) {
-            respond availability.errors
-            return
-        }
-
-        respond availability, [status: CREATED, view:"show"]
+        render responseData as JSON
     }
 
     @Transactional
