@@ -56,6 +56,8 @@ class GuestRoomController {
                 respond guestRoom.errors
                 return
             }else {
+                Property property = Property.findByBookingId(guestRoom.property.id as String)
+                guestRoom.property = property
                 guestRoomService.save(guestRoom)
                 statusCode = StatusCodeRB.OK_ROOM
             }
